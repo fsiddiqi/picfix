@@ -1,0 +1,12 @@
+{
+  "name": "picfix",
+  "private": true,
+  "description": "Scan physical photos into digital albums — PWA",
+  "scripts": {
+    "dev": "cd pwa && npm run dev",
+    "build": "cd pwa && npm run build",
+    "test": "cd pwa && npm test",
+    "lint": "cd pwa && npm run lint",
+    "preview": "cd pwa && npm run preview"
+  }
+}

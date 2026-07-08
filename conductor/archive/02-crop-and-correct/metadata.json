@@ -1,0 +1,8 @@
+{
+  "track_id": "02-crop-and-correct",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-08T14:17:00Z",
+  "updated_at": "2026-07-08T14:17:00Z",
+  "description": "Boundary detection, perspective correction, and automatic color/exposure correction for captured photos."
+}

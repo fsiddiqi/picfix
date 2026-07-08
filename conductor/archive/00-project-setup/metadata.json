@@ -1,0 +1,8 @@
+{
+  "track_id": "00-project-setup",
+  "type": "chore",
+  "status": "archived",
+  "created_at": "2026-07-08T14:17:00Z",
+  "updated_at": "2026-07-08T14:23:00Z",
+  "description": "Initialize Expo app, configure directories, and set up Jest testing library."
+}

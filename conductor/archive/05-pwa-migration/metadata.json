@@ -1,0 +1,8 @@
+{
+  "track_id": "05-pwa-migration",
+  "type": "migration",
+  "status": "pending",
+  "created_at": "2026-07-08T18:30:00Z",
+  "updated_at": "2026-07-08T18:30:00Z",
+  "description": "Migrate from React Native + Expo to a Progressive Web App (React + Vite) to eliminate native SDK compatibility issues."
+}

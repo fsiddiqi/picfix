@@ -1,13 +1,30 @@
 # Tech Stack
 
 ## Phase 1 (MVP) — on-device only
-- **Framework:** React Native + Expo
-- **Camera:** `expo-camera` or `react-native-vision-camera`
-- **CV processing:** OpenCV via native module (`processing/` module, pure
-  functions, no UI/storage imports)
+
+Two delivery tracks are maintained:
+
+### PWA (primary — see Track 05)
+- **Framework:** React 18 + Vite + TypeScript
+- **Camera:** `navigator.mediaDevices.getUserMedia()` → `<video>` + `<canvas>`
+- **CV processing:** Pure TypeScript functions (`processing/` module, no
+  DOM/IO imports); Web Workers for heavy pixel ops
+- **Local storage:** IndexedDB via Dexie.js (Blob storage + metadata)
+- **State management:** React hooks + context (no external lib needed)
+- **Testing:** Vitest + `@testing-library/react` + `fake-indexeddb`
+- **PWA:** `vite-plugin-pwa` for service worker + manifest; fully offline
+  after first load
+- **Deployment:** Static host (Netlify, Vercel, Cloudflare Pages); no app
+  stores
+
+### React Native (legacy — phased out)
+- **Framework:** React Native + Expo (SDK 56, pinned)
+- **Camera:** `expo-camera`
+- **CV processing:** OpenCV via native module
 - **Local storage:** SQLite (`expo-sqlite`) for metadata, device
   filesystem for images
-- **State management:** React Query or Zustand
+- **Gating issue:** Expo Go does not support Android 16; requires dev
+  build or iOS only
 
 ## Phase 2 — adds backend
 - **Backend:** FastAPI (Python), containerized
