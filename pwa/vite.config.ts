@@ -23,6 +23,10 @@ export default defineConfig({
         theme_color: '#121212',
         background_color: '#121212',
         display: 'standalone',
+        scope: '/',
+        start_url: '/',
+        orientation: 'portrait',
+        categories: ['photography', 'utilities'],
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -33,6 +37,13 @@ export default defineConfig({
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },

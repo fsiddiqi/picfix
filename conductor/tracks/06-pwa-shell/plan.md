@@ -3,11 +3,11 @@
 Status legend: `[ ]` pending, `[~]` in progress, `[x]` done
 
 ## Phase 1: App Shell Architecture
-- [ ] 1.1 App shell pattern: render shell immediately, lazy-load screens
-- [ ] 1.2 Navigation transitions (slide/fade between capture/albums/photos)
-- [ ] 1.3 Bottom tab or sidebar nav pattern for mobile thumbs
-- [ ] 1.4 Viewport meta, safe-area insets, status bar styling
-- [ ] **Checkpoint:** app shell loads instantly with nav; screens lazy-load
+- [x] 1.1 App shell pattern: render shell immediately, lazy-load screens
+- [x] 1.2 Navigation transitions (slide/fade between capture/albums/photos)
+- [x] 1.3 Bottom tab or sidebar nav pattern for mobile thumbs
+- [x] 1.4 Viewport meta, safe-area insets, status bar styling
+- [x] **Checkpoint:** app shell loads instantly with nav; screens lazy-load
 
 ## Phase 2: Manifest Polish
 - [ ] 2.1 Full manifest: short_name, description, categories, screenshots
