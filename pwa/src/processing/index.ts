@@ -1,1 +1,3 @@
-// Pure CV functions — no DOM or storage imports allowed.
+export { generateThumbnail } from './thumbnail';
+export { detectPhotoBounds, cropPixels, perspectiveCorrect } from './crop';
+export type { Rect, Point } from './crop';

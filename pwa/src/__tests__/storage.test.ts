@@ -1,4 +1,4 @@
-import { db, ensureUnsortedAlbum, insertPhoto, getPhotos } from '../storage/database';
+import { db, ensureUnsortedAlbum, insertPhoto, getPhotos, getPhoto, updatePhoto } from '../storage/database';
 
 describe('storage', () => {
   beforeEach(async () => {
@@ -32,8 +32,6 @@ describe('storage', () => {
       expect(photo!.status).toBe('needs_review');
       expect(photo!.capturedAt).toBeInstanceOf(Date);
     });
-
-
   });
 
   describe('getPhotos', () => {
@@ -49,6 +47,31 @@ describe('storage', () => {
       const albumId = await ensureUnsortedAlbum();
       const photos = await getPhotos(albumId);
       expect(photos).toEqual([]);
+    });
+  });
+
+  describe('getPhoto', () => {
+    it('returns a photo by id', async () => {
+      const albumId = await ensureUnsortedAlbum();
+      const photoId = await insertPhoto({ albumId, blob: new Blob(['a']), status: 'needs_review' });
+      const photo = await getPhoto(photoId);
+      expect(photo).toBeDefined();
+      expect(photo!.id).toBe(photoId);
+    });
+
+    it('returns undefined for non-existent id', async () => {
+      const photo = await getPhoto(999);
+      expect(photo).toBeUndefined();
+    });
+  });
+
+  describe('updatePhoto', () => {
+    it('updates photo fields', async () => {
+      const albumId = await ensureUnsortedAlbum();
+      const photoId = await insertPhoto({ albumId, blob: new Blob(['a']), status: 'needs_review' });
+      await updatePhoto(photoId, { status: 'reviewed', blob: new Blob(['b']) });
+      const photo = await getPhoto(photoId);
+      expect(photo!.status).toBe('reviewed');
     });
   });
 });

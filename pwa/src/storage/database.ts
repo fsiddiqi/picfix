@@ -52,3 +52,14 @@ export async function insertPhoto(photo: Omit<Photo, 'id' | 'capturedAt'> & { ca
 export async function getPhotos(albumId: number): Promise<Photo[]> {
   return db.photos.where('albumId').equals(albumId).toArray();
 }
+
+export async function getPhoto(id: number): Promise<Photo | undefined> {
+  return db.photos.get(id);
+}
+
+export async function updatePhoto(
+  id: number,
+  changes: Partial<Omit<Photo, 'id' | 'capturedAt'>>,
+): Promise<void> {
+  await db.photos.update(id, changes);
+}
