@@ -4,10 +4,6 @@ All tracks target the PWA (`pwa/`). Completed tracks are archived in `archive/`.
 
 ---
 
-- [ ] **Track 06: PWA App Shell & Installability**
-  *Link: [./tracks/06-pwa-shell/](./tracks/06-pwa-shell/)*
-  Manifest polish, service worker caching, A2HS prompt, offline fallback.
-
 ---
 
 - [ ] **Track 07: Image Processing Pipeline**
@@ -29,6 +25,9 @@ All tracks target the PWA (`pwa/`). Completed tracks are archived in `archive/`.
 ---
 
 ## Archived
+
+- **Track 06 — PWA App Shell & Installability** ✅
+  App shell, lazy loading, bottom tabs, offline support, install prompt.
 
 - **Track 05 — Core PWA (Capture + Browse)** ✅
   Camera capture, thumbnail gen, IndexedDB persistence, album browsing.
