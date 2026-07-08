@@ -1,5 +1,7 @@
 import { useState, useCallback, lazy, Suspense } from 'react';
 import TabBar from './TabBar';
+import UpdatePrompt from './UpdatePrompt';
+import InstallBanner from './InstallBanner';
 
 const CaptureScreen = lazy(() => import('../capture/CaptureScreen'));
 const AlbumList = lazy(() => import('../albums/AlbumList'));
@@ -92,6 +94,8 @@ export default function AppShell() {
 
   return (
     <div style={styles.shell}>
+      <UpdatePrompt />
+      <InstallBanner />
       <div style={styles.screenArea}>
         <div
           style={{

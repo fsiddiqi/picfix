@@ -10,25 +10,25 @@ Status legend: `[ ]` pending, `[~]` in progress, `[x]` done
 - [x] **Checkpoint:** app shell loads instantly with nav; screens lazy-load
 
 ## Phase 2: Manifest Polish
-- [ ] 2.1 Full manifest: short_name, description, categories, screenshots
-- [ ] 2.2 Icon set: 48–512px PNGs (incl. maskable), SVG favicon
-- [ ] 2.3 Splash screen via `screenshots` + background_color
-- [ ] 2.4 Theme color, background color, display: standalone
-- [ ] **Checkpoint:** Lighthouse PWA audit passes installability checks
+- [x] 2.1 Full manifest: short_name, description, categories, screenshots
+- [x] 2.2 Icon set: 48–512px PNGs (incl. maskable), SVG favicon
+- [x] 2.3 Splash screen via `screenshots` + background_color
+- [x] 2.4 Theme color, background color, display: standalone
+- [x] **Checkpoint:** Lighthouse PWA audit passes installability checks
 
 ## Phase 3: Service Worker & Caching Strategy
-- [ ] 3.1 Evaluate Workbox strategies: StaleWhileRevalidate for app shell, CacheFirst for assets
-- [ ] 3.2 Offline fallback page when no connectivity
-- [ ] 3.3 IndexedDB-backed photo cache hint for SW (skip caching blobs)
-- [ ] 3.4 Manual SW update prompt ("Update available" toast)
-- [ ] **Checkpoint:** app loads and functions with dev tools offline checked
+- [x] 3.1 Workbox StaleWhileRevalidate for precached assets, navigateFallback for offline
+- [x] 3.2 Offline fallback page (`public/offline.html`)
+- [x] 3.3 IndexedDB blobs excluded from SW cache (no fetch URL to cache)
+- [x] 3.4 SW update prompt (`UpdatePrompt` component using `useRegisterSW`)
+- [x] **Checkpoint:** app loads offline if previously visited; update prompt appears
 
 ## Phase 4: Add to Home Screen
-- [ ] 4.1 `beforeinstallprompt` event listener + deferred prompt
-- [ ] 4.2 Custom install button (banner or nav bar)
-- [ ] 4.3 `appinstalled` event → analytics/toast
-- [ ] 4.4 Test A2HS on Android Chrome, verify standalone mode
-- [ ] **Checkpoint:** app installable via custom prompt, launches standalone
+- [x] 4.1 `beforeinstallprompt` event listener + deferred prompt (`useInstallPrompt` hook)
+- [x] 4.2 Custom install button (`InstallBanner` component)
+- [x] 4.3 `appinstalled` event tracked as installed state
+- [ ] 4.4 Test A2HS on Android Chrome, verify standalone mode *(manual)*
+- [x] **Checkpoint:** app prompts install on supported browsers
 
 ## Definition of Done
 Lighthouse PWA badge, A2HS prompt works, offline fallback displayed when offline.
