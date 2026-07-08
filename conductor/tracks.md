@@ -2,6 +2,7 @@
 
 | ID | Track | Phase | Status |
 |---|---|---|---|
+| 00-project-setup | Project Setup & Scaffolding | 1 (MVP) | not_started |
 | 01-scan-capture | Scan Capture | 1 (MVP) | not_started |
 | 02-crop-and-correct | Crop & Auto-Correct | 1 (MVP) | not_started |
 | 03-album-management | Album Management | 1 (MVP) | not_started |
