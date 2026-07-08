@@ -5,12 +5,12 @@ Status legend: `[ ]` pending, `[~]` in progress, `[x]` done
 All processing runs client-side via Canvas 2D / WebGL — zero uploads.
 
 ## Phase 1: Crop & Perspective Correction
-- [ ] 1.1 Auto-detect photo boundaries (contour detection on canvas pixel data)
-- [ ] 1.2 Render detected rectangle overlay on captured image
-- [ ] 1.3 Manual corner-drag UI to adjust crop rectangle
-- [ ] 1.4 Perspective transform (4-point homography via canvas `drawImage` with source coords or WebGL)
-- [ ] 1.5 Save cropped result back to IndexedDB, update `status: 'reviewed'`
-- [ ] **Checkpoint:** captured photo can be auto-cropped with manual override
+- [x] 1.1 Auto-detect photo boundaries (`detectPhotoBounds` — brightness-threshold edge detection)
+- [x] 1.2 Render detected rectangle overlay on captured image (SVG polygon overlay + corner handles)
+- [x] 1.3 Manual corner-drag UI to adjust crop rectangle (pointer events with `setPointerCapture`)
+- [x] 1.4 Perspective transform (`perspectiveCorrect` — 4-point bilinear mapping)
+- [x] 1.5 Save cropped result back to IndexedDB, update `status: 'reviewed'`
+- [x] **Checkpoint:** captured photo can be auto-cropped with manual override
 
 ## Phase 2: Color & Tone Adjustment
 - [ ] 2.1 Brightness/contrast sliders (canvas pixel iteration or CSS filter → re-encode)

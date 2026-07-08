@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { getPhotos, type Photo } from '../storage';
 
 const styles: Record<string, React.CSSProperties> = {
@@ -35,12 +35,28 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 2,
     padding: 2,
   },
+  cell: {
+    position: 'relative' as const,
+    aspectRatio: '1',
+    cursor: 'pointer',
+  },
   thumb: {
     width: '100%',
-    aspectRatio: '1',
+    height: '100%',
     objectFit: 'cover' as const,
     backgroundColor: '#333',
-    cursor: 'pointer',
+  },
+  badge: {
+    position: 'absolute' as const,
+    top: 4,
+    left: 4,
+    padding: '2px 6px',
+    borderRadius: 4,
+    fontSize: 10,
+    fontWeight: 600,
+    backgroundColor: '#FF9500',
+    color: '#fff',
+    lineHeight: 1.3,
   },
   empty: {
     gridColumn: '1 / -1',
@@ -54,13 +70,20 @@ export default function PhotoGrid({
   albumId,
   albumName,
   onBack,
+  onCrop,
+  refreshKey = 0,
 }: {
   albumId: number;
   albumName: string;
   onBack: () => void;
+  onCrop: (photoId: number) => void;
+  refreshKey?: number;
 }) {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [urls, setUrls] = useState<Map<number, string>>(new Map());
+
+  const urlsRef = useRef(urls);
+  urlsRef.current = urls;
 
   useEffect(() => {
     let cancelled = false;
@@ -68,6 +91,8 @@ export default function PhotoGrid({
       const data = await getPhotos(albumId);
       if (cancelled) return;
       setPhotos(data);
+      // revoke old urls
+      urlsRef.current.forEach((u) => URL.revokeObjectURL(u));
       const map = new Map<number, string>();
       for (const p of data) {
         if (p.id && p.thumbnailBlob) {
@@ -79,17 +104,13 @@ export default function PhotoGrid({
     load();
     return () => {
       cancelled = true;
-      urls.forEach((u) => URL.revokeObjectURL(u));
+      urlsRef.current.forEach((u) => URL.revokeObjectURL(u));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [albumId]);
+  }, [albumId, refreshKey]);
 
   const handlePhotoClick = useCallback((photo: Photo) => {
-    const url = photo.blob ? URL.createObjectURL(photo.blob) : null;
-    if (url) {
-      window.open(url, '_blank');
-    }
-  }, []);
+    if (photo.id) onCrop(photo.id);
+  }, [onCrop]);
 
   return (
     <div style={styles.container}>
@@ -99,13 +120,16 @@ export default function PhotoGrid({
       </div>
       <div style={styles.grid}>
         {photos.map((p) => (
-          <img
-            key={p.id}
-            src={p.id && urls.has(p.id) ? urls.get(p.id)! : undefined}
-            style={styles.thumb}
-            onClick={() => handlePhotoClick(p)}
-            alt=""
-          />
+          <div key={p.id} style={styles.cell} onClick={() => handlePhotoClick(p)}>
+            <img
+              src={p.id && urls.has(p.id) ? urls.get(p.id)! : undefined}
+              style={styles.thumb}
+              alt=""
+            />
+            {p.status === 'needs_review' && (
+              <div style={styles.badge}>NEW</div>
+            )}
+          </div>
         ))}
         {photos.length === 0 && (
           <div style={styles.empty}>No photos yet</div>

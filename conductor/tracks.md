@@ -4,14 +4,6 @@ All tracks target the PWA (`pwa/`). Completed tracks are archived in `archive/`.
 
 ---
 
----
-
-- [ ] **Track 07: Image Processing Pipeline**
-  *Link: [./tracks/07-image-processing/](./tracks/07-image-processing/)*
-  Crop, perspective correct, color adjust, restoration filters. All client-side canvas.
-
----
-
 - [ ] **Track 08: Album Management & Metadata**
   *Link: [./tracks/08-album-management/](./tracks/08-album-management/)*
   CRUD albums, photo detail view, move/delete photos, metadata editing.
@@ -25,6 +17,9 @@ All tracks target the PWA (`pwa/`). Completed tracks are archived in `archive/`.
 ---
 
 ## Archived
+
+- **Track 07 — Image Processing Pipeline** ✅
+  Crop & perspective correction, auto-detect photo bounds, manual corner-drag UI, save result to IndexedDB.
 
 - **Track 06 — PWA App Shell & Installability** ✅
   App shell, lazy loading, bottom tabs, offline support, install prompt.
