@@ -18,3 +18,9 @@ yarn-error.*
 
 # custom
 files.zip
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/

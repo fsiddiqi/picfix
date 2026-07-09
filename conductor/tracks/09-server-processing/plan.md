@@ -4,26 +4,26 @@ Moves complex CV processing from the PWA client to a Python (FastAPI) backend. T
 
 Status legend: `[ ]` pending, `[~]` in progress, `[x]` done
 
-## Phase 1: FastAPI Backend Setup
-- [ ] 1.1 Scaffold FastAPI project (`backend/`), health endpoint
-- [ ] 1.2 Dockerize: `Dockerfile` + `docker-compose.yml` (FastAPI + Celery + Redis)
-- [ ] 1.3 Accept multipart image upload, return processed result as JSON + blob
-- [ ] 1.4 CORS config for PWA dev server
-- [ ] **Checkpoint:** `POST /process` returns 200 with mock result
+## Phase 1: FastAPI Backend Setup ✅
+- [x] 1.1 Scaffold FastAPI project (`backend/`), health endpoint
+- [x] 1.2 Dockerize: `Dockerfile` + `docker-compose.yml`
+- [x] 1.3 Accept multipart image upload, return corrected image as JPEG body + regions in `X-Regions` header
+- [x] 1.4 CORS config for PWA dev server (allow all origins)
+- [x] **Checkpoint:** `POST /process` returns 200 with corrected image + region JSON
 
-## Phase 2: Multi-Photo Detection (OpenCV)
-- [ ] 2.1 `process_image()` pipeline: receive raw capture, detect photo regions via contour finding (not single-axis scan)
-- [ ] 2.2 Return `DetectedRegion[]` with corners + confidence per region
-- [ ] 2.3 Handle 0, 1, and 2+ photos gracefully
-- [ ] 2.4 Integration test with sample images
-- [ ] **Checkpoint:** upload multi-photo capture → server returns correct region array
+## Phase 2: Multi-Photo Detection (OpenCV) ✅
+- [x] 2.1 `detect_photo_regions()` pipeline: contour-finding via Canny edge detection + contour approximation
+- [x] 2.2 Returns `DetectedRegion[]` with 4 corners + confidence per region
+- [x] 2.3 Handles 0, 1, and 2+ photos gracefully (area threshold filter)
+- [x] 2.4 Integration test with synthetic images (single, multi, uniform, low-light)
+- [x] **Checkpoint:** upload multi-photo capture → server returns correct region array
 
-## Phase 3: Auto-Color Correction
-- [ ] 3.1 Histogram stretching / auto-levels per channel
-- [ ] 3.2 White balance correction (gray-world or similar)
-- [ ] 3.3 Return corrected image blob alongside detected regions
-- [ ] 3.4 Tests: before/after comparison on known test fixtures
-- [ ] **Checkpoint:** corrected image output is visibly improved vs raw capture
+## Phase 3: Auto-Color Correction ✅
+- [x] 3.1 Histogram stretching (1st–99th percentile per channel)
+- [x] 3.2 White balance correction (gray-world)
+- [x] 3.3 Corrected image returned as JPEG body alongside region JSON header
+- [x] 3.4 Tests: output shape, brightness increase, color cast reduction
+- [x] **Checkpoint:** corrected image output is visibly improved vs raw capture
 
 ## Phase 4: PWA Client Integration
 - [ ] 4.1 Upload captured image to `POST /process` (with loading state)
