@@ -41,4 +41,4 @@ All tracks target the PWA (`pwa/`). Completed tracks are archived in `archive/`.
 - Track 01 — Scan Capture *(Expo original, ported to Track 05)*
 - Track 02 — Crop & Auto-Correct *(Expo original, superseded by Track 07)*
 - Track 03 — Album Management *(Expo original, superseded by Track 08)*
-- Track 04 — Colorize & Restore *(Expo original, superseded by Track 07)*
+- **Track 04 — Colorize & Restore** ✅ *(Expo prototype, superseded by Track 07)*

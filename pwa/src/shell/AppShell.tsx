@@ -8,6 +8,7 @@ const AlbumList = lazy(() => import('../albums/AlbumList'));
 const PhotoGrid = lazy(() => import('../albums/PhotoGrid'));
 const PhotoDetail = lazy(() => import('../albums/PhotoDetail'));
 const CropScreen = lazy(() => import('../albums/CropScreen'));
+const ChangelogScreen = lazy(() => import('./ChangelogScreen'));
 
 const styles: Record<string, React.CSSProperties> = {
   shell: {
@@ -50,7 +51,8 @@ type Screen =
   | { name: 'albums' }
   | { name: 'photos'; albumId: number; albumName: string }
   | { name: 'detail'; photoId: number }
-  | { name: 'crop'; photoId: number };
+  | { name: 'crop'; photoId: number }
+  | { name: 'progress' };
 
 export default function AppShell() {
   const [screen, setScreen] = useState<Screen>({ name: 'capture' });
@@ -83,6 +85,9 @@ export default function AppShell() {
           photoId: params?.photoId as number,
         });
         break;
+      case 'progress':
+        setScreen({ name: 'progress' });
+        break;
     }
   }, []);
 
@@ -90,7 +95,7 @@ export default function AppShell() {
     handleNavigate(key);
   }, [handleNavigate]);
 
-  const activeTab = screen.name === 'capture' ? 'capture' : 'albums';
+  const activeTab = screen.name === 'progress' ? 'progress' : screen.name === 'capture' ? 'capture' : 'albums';
 
   const renderScreen = (s: Screen) => {
     switch (s.name) {
@@ -126,6 +131,8 @@ export default function AppShell() {
             }}
           />
         );
+      case 'progress':
+        return <ChangelogScreen />;
     }
   };
 
@@ -148,14 +155,14 @@ export default function AppShell() {
         <div
           style={{
             ...styles.page,
-            ...(screen.name === 'albums' || screen.name === 'photos' || screen.name === 'detail' || screen.name === 'crop'
+            ...(screen.name !== 'capture'
               ? styles.pageVisible
               : styles.pageHidden),
           }}
           aria-hidden={screen.name === 'capture'}
         >
           <Suspense fallback={<div style={styles.loader}>Loading…</div>}>
-            {(screen.name === 'albums' || screen.name === 'photos' || screen.name === 'detail' || screen.name === 'crop') && renderScreen(screen)}
+            {screen.name !== 'capture' && renderScreen(screen)}
           </Suspense>
         </div>
       </div>

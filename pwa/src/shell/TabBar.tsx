@@ -33,6 +33,7 @@ const styles: Record<string, React.CSSProperties> = {
 const tabs = [
   { key: 'capture', label: 'Capture', icon: '📷' },
   { key: 'albums', label: 'Albums', icon: '🖼' },
+  { key: 'progress', label: 'Progress', icon: '📋' },
 ] as const;
 
 export default function TabBar({
