@@ -1,1 +1,1 @@
-export { db, type Album, type Photo, ensureUnsortedAlbum, insertPhoto, getPhotos, getPhoto, updatePhoto } from './database';
+export { db, type Album, type Photo, ensureUnsortedAlbum, insertPhoto, getPhotos, getPhoto, updatePhoto, createAlbum, getAlbum, renameAlbum, deleteAlbum, getAlbums, movePhotosToAlbum, deletePhoto, deletePhotos } from './database';

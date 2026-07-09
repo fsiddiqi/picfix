@@ -6,6 +6,7 @@ import InstallBanner from './InstallBanner';
 const CaptureScreen = lazy(() => import('../capture/CaptureScreen'));
 const AlbumList = lazy(() => import('../albums/AlbumList'));
 const PhotoGrid = lazy(() => import('../albums/PhotoGrid'));
+const PhotoDetail = lazy(() => import('../albums/PhotoDetail'));
 const CropScreen = lazy(() => import('../albums/CropScreen'));
 
 const styles: Record<string, React.CSSProperties> = {
@@ -48,6 +49,7 @@ type Screen =
   | { name: 'capture' }
   | { name: 'albums' }
   | { name: 'photos'; albumId: number; albumName: string }
+  | { name: 'detail'; photoId: number }
   | { name: 'crop'; photoId: number };
 
 export default function AppShell() {
@@ -67,6 +69,12 @@ export default function AppShell() {
           name: 'photos',
           albumId: params?.albumId as number,
           albumName: params?.albumName as string,
+        });
+        break;
+      case 'detail':
+        setScreen({
+          name: 'detail',
+          photoId: params?.photoId as number,
         });
         break;
       case 'crop':
@@ -96,8 +104,16 @@ export default function AppShell() {
             albumId={s.albumId}
             albumName={s.albumName}
             onBack={() => setScreen({ name: 'albums' })}
-            onCrop={(photoId) => setScreen({ name: 'crop', photoId })}
+            onShowDetail={(photoId) => setScreen({ name: 'detail', photoId })}
             refreshKey={refreshKey}
+          />
+        );
+      case 'detail':
+        return (
+          <PhotoDetail
+            photoId={s.photoId}
+            onBack={() => setScreen({ name: 'albums' })}
+            onCrop={(photoId) => setScreen({ name: 'crop', photoId })}
           />
         );
       case 'crop':
@@ -132,14 +148,14 @@ export default function AppShell() {
         <div
           style={{
             ...styles.page,
-            ...(screen.name === 'albums' || screen.name === 'photos' || screen.name === 'crop'
+            ...(screen.name === 'albums' || screen.name === 'photos' || screen.name === 'detail' || screen.name === 'crop'
               ? styles.pageVisible
               : styles.pageHidden),
           }}
           aria-hidden={screen.name === 'capture'}
         >
           <Suspense fallback={<div style={styles.loader}>Loading…</div>}>
-            {(screen.name === 'albums' || screen.name === 'photos' || screen.name === 'crop') && renderScreen(screen)}
+            {(screen.name === 'albums' || screen.name === 'photos' || screen.name === 'detail' || screen.name === 'crop') && renderScreen(screen)}
           </Suspense>
         </div>
       </div>

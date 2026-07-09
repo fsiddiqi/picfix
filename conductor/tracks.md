@@ -4,19 +4,29 @@ All tracks target the PWA (`pwa/`). Completed tracks are archived in `archive/`.
 
 ---
 
-- [ ] **Track 08: Album Management & Metadata**
-  *Link: [./tracks/08-album-management/](./tracks/08-album-management/)*
-  CRUD albums, photo detail view, move/delete photos, metadata editing.
+- [ ] **Track 09: Server-Side Processing Pipeline**
+  *Link: [./tracks/09-server-processing/](./tracks/09-server-processing/)*
+  FastAPI + OpenCV backend: multi-photo detection, auto-color correction, perspective correction. Pushes complex CV processing server-side (Python) for better quality and speed.
 
 ---
 
-- [ ] **Track 09: Data Portability & Sync**
-  *Link: [./tracks/09-data-portability/](./tracks/09-data-portability/)*
-  Export/import albums as zip, WebDAV sync, backup/restore.
+- [ ] **Track 10: Album UX Enhancements**
+  *Link: [./tracks/10-album-ux/](./tracks/10-album-ux/)*
+  Cover photo selection, search, people/location metadata editing, album reordering.
 
 ---
+
+## Stretch / Future
+
+- **Data Portability & Sync** — Export/import albums as zip, WebDAV sync, backup/restore. (Previously Track 09, deferred.)
+- **B&W Colorization** — AI colorization of monochrome photos.
+- **Face Sharpening** — ML-based face enhancement.
+- **Cloud Sync & Subscriptions** — Multi-device sync, Stripe billing.
 
 ## Archived
+
+- **Track 08 — Album Management & Metadata** ✅
+  CRUD albums, photo detail view, move/delete photos, metadata editing.
 
 - **Track 07 — Image Processing Pipeline** ✅
   Crop & perspective correction, auto-detect photo bounds, manual corner-drag UI, save result to IndexedDB.

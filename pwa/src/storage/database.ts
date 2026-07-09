@@ -63,3 +63,46 @@ export async function updatePhoto(
 ): Promise<void> {
   await db.photos.update(id, changes);
 }
+
+export async function getAlbum(id: number): Promise<Album | undefined> {
+  return db.albums.get(id);
+}
+
+export async function createAlbum(name: string): Promise<number> {
+  const id = await db.albums.add({ name, createdAt: new Date() });
+  return id as number;
+}
+
+export async function renameAlbum(id: number, name: string): Promise<void> {
+  await db.albums.update(id, { name });
+}
+
+export async function deleteAlbum(id: number): Promise<void> {
+  const unsortedId = await ensureUnsortedAlbum();
+  await db.photos.where('albumId').equals(id).modify({ albumId: unsortedId });
+  await db.albums.delete(id);
+}
+
+export async function getAlbums(): Promise<Album[]> {
+  return db.albums.toArray();
+}
+
+export async function movePhotosToAlbum(photoIds: number[], targetAlbumId: number): Promise<void> {
+  await db.transaction('rw', db.photos, async () => {
+    for (const id of photoIds) {
+      await db.photos.update(id, { albumId: targetAlbumId });
+    }
+  });
+}
+
+export async function deletePhoto(id: number): Promise<void> {
+  await db.photos.delete(id);
+}
+
+export async function deletePhotos(ids: number[]): Promise<void> {
+  await db.transaction('rw', db.photos, async () => {
+    for (const id of ids) {
+      await db.photos.delete(id);
+    }
+  });
+}
