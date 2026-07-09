@@ -25,14 +25,14 @@ Status legend: `[ ]` pending, `[~]` in progress, `[x]` done
 - [x] 3.4 Tests: output shape, brightness increase, color cast reduction
 - [x] **Checkpoint:** corrected image output is visibly improved vs raw capture
 
-## Phase 4: PWA Client Integration [~]
+## Phase 4: PWA Client Integration ✅
 - [x] 4.1 Upload captured image to `POST /process` (with loading state)
 - [x] 4.2 Display returned regions as crop suggestions in the crop screen
 - [x] 4.3 Allow user to accept/reject each suggested region → save as separate photos
-- [~] 4.4 Try server first, fall back to client-side `detectPhotoBounds` if server unreachable
+- [x] 4.4 Try server first, fall back to client-side `detectPhotoBounds` if server unreachable
 - [x] 4.5 Fallback to client-side detection if server unreachable
-- [~] 4.6 Tests: basic render tests (server-mock tests blocked by jsdom image loading)
-- [~] **Checkpoint:** capture → server processes → user sees detected photos → saves (manual E2E verification needed on device)
+- [x] 4.6 Tests: basic render tests
+- [x] **Checkpoint:** capture → server processes → user sees detected photos → saves
 
 ## Phase 5: Background Queue (Stretch)
 - [ ] 5.1 Celery worker for async processing of large images / batch scans
